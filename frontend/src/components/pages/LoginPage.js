@@ -3,24 +3,32 @@ import { Link } from 'react-router-dom'
 import { apiPost } from '../../apiService';
 import '../../App.css'
 export default function SignInPage() {
-    
 
-    const [name, setName] = useState('');
+
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
 
 
     const submitLogin = async () => {
-        if (!name) {
-            alert("username is  required")
+        if (!email) {
+            alert("email is  required")
 
         }
+
+        else if (email !== '' && /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i.test(email) === false) {
+            alert("Please enter proper email address")
+
+        }
+
         else if (!password) {
             alert("password is  required")
         }
+
+
         else {
             try {
-                let res = await apiPost("/login", null, { email:name,  password })
+                let res = await apiPost("/login", null, { email, password })
                 if (res.success) {
                     alert(res.message)
                     window.history.pushState(null, null, window.location.href);
@@ -29,10 +37,7 @@ export default function SignInPage() {
                 }
                 else {
                     alert(res.message)
-
                 }
-
-
 
             } catch (error) {
                 alert("something went wrong!!")
@@ -51,7 +56,7 @@ export default function SignInPage() {
             <div className='form' >
                 <p>
                     <label>Username or email address</label><br />
-                    <input type="text" name="first_name" onChange={(e) => setName(e.target.value)} />
+                    <input type="text" name="enter email" onChange={(e) => setEmail(e.target.value)} />
                 </p>
                 <p>
                     <label>Password</label>

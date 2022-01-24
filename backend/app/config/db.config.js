@@ -1,5 +1,5 @@
+
 module.exports = {
-  HOST: "localhost",
-  PORT: 27017,
-  DB: "db"
+  MONGODBURL: ` mongodb://${"localhost"}:${27017}/${"db"}`
+  
 };

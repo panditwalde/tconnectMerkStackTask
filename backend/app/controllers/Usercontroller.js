@@ -4,14 +4,11 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 const ScretKeyConfig = require("../config/ScretKeyConfig");
 const UserService = require("../Service/UserService");
-
 class Usercontroller {
-
 
   register = async (req, res) => {
 
     const responseResult = {}
-
     const { name, email, password } = req.body;
 
     try {
@@ -24,10 +21,9 @@ class Usercontroller {
 
       let existEmail = await UserService.find({ 'email': email });
 
-      if (existEmail != undefined && existEmail.length > 0) {
-        responseResult.message = "Email already exists"
-        console.log("Email already exist:" + email);
+      if (existEmail  && existEmail.length > 0) {
 
+        responseResult.message = "Email already exists"
         res.status(200).send(responseResult);
       }
       else {
@@ -35,13 +31,9 @@ class Usercontroller {
         let response = await UserService.add(user);
 
         if (response) {
-
-
           responseResult.success = true;
           responseResult.message = "user register Sucessfully ";
           responseResult.data = response;
-
-          console.log("ddd", responseResult)
           res.status(201).send(responseResult)
 
         }
@@ -57,12 +49,7 @@ class Usercontroller {
       responseResult.success = false;
       responseResult.message = error.message;
       res.status(200).send(responseResult)
-
     }
-
-
-
-
   };
 
 
@@ -76,17 +63,14 @@ class Usercontroller {
 
       var userInputData = { email: email}
       UserService.find(userInputData).then(async (userData) => {
-        if (typeof userData != undefined && userData.length > 0) {
-
+        if ( userData && userData.length > 0) {
 
           const validPass = await bcrypt.compare(password, userData[0].password);
-          console.log(validPass)
           if (validPass) {
             let token = jwt.sign({ id: userData[0]._id }, ScretKeyConfig.secret);
             responseResult.success = true;
             responseResult.message = "login sucssfully";
             responseResult.token = token;
-
             res.status(200).send(responseResult);
 
           } else {
@@ -102,7 +86,6 @@ class Usercontroller {
           res.status(200).send(responseResult);
         }
       })
-
   
     } catch (error) {
       responseResult.success = false;
