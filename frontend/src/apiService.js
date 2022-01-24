@@ -10,7 +10,7 @@ export const apiGet = (url, token) => {
         Accept: "application/json",
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${token}`,
+        // Authorization: `Bearer ${token}`,
       },
     })
     .then((res) => res.data);
@@ -23,7 +23,7 @@ export const apiPost = (url, token, body) => {
         Accept: "application/json",
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${token}`,
+        // Authorization: `Bearer ${token}`,
       },
     })
     .then((res) => res.data);

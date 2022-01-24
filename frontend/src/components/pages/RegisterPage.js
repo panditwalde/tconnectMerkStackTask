@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { Link } from 'react-router-dom'
-import { apiGet, apiPost } from '../../apiService';
-
+import {  apiPost } from '../../apiService';
 import '../../App.css'
 
 export default function SignUpPage() {
@@ -85,7 +84,7 @@ export default function SignUpPage() {
                 </p>
             </div>
             <footer>
-                <p><Link to="/">Back to Homepage</Link>.</p>
+                <p><Link to="/">Back to login</Link>.</p>
             </footer>
         </div>
     )
