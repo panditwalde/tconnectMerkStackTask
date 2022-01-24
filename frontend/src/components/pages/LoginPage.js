@@ -20,7 +20,7 @@ export default function SignInPage() {
         }
         else {
             try {
-                let res = await apiPost("/login", null, { name,  password })
+                let res = await apiPost("/login", null, { email:name,  password })
                 if (res.success) {
                     alert(res.message)
                     window.history.pushState(null, null, window.location.href);

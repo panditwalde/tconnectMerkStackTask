@@ -20,7 +20,7 @@ class UserService {
     find(data,) {
 
 
-        return userModel.find(data,)
+        return userModel.find(data)
             .then((result) => {
                 //console.log(result); return;
                 return result

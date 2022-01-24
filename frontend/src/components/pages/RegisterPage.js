@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import {  apiPost } from '../../apiService';
+import {  apiGet, apiPost } from '../../apiService';
 
 import '../../App.css'
 
@@ -9,7 +9,6 @@ export default function SignUpPage() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
 
 
     const submitSingup = async () => {
@@ -29,10 +28,10 @@ export default function SignUpPage() {
         }
 
         else {
-            alert("success full")
 
             try {
                 let res = await apiPost("/register", null, { name, email, password })
+                console.log(res)
                 if (res.success) {
 
                     alert(res.message)

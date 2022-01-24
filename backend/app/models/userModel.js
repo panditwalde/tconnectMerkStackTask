@@ -35,7 +35,7 @@ class UserModel {
 
   find(data) {
 
-
+console.log(data)
     return new Promise((resolve, reject) => {
       user.find(data)
         .then((result) => {

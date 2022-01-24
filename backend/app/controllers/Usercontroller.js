@@ -13,6 +13,7 @@ class Usercontroller {
     const responseResult = {}
 
     const { name, email, password } = req.body;
+
     try {
 
       const user = {
@@ -21,38 +22,41 @@ class Usercontroller {
         password: bcrypt.hashSync(password, 8)
       };
 
-      let existEmail = await UserService.find({ 'email': email, 'isVerified': true });
-
+      let existEmail = await UserService.find({ 'email': email });
 
       if (existEmail != undefined && existEmail.length > 0) {
         responseResult.message = "Email already exists"
         console.log("Email already exist:" + email);
 
-        res.status(409).send(responseResult);
+        res.status(200).send(responseResult);
       }
       else {
 
-        let res = await UserService.add(user);
-        if (res) {
+        let response = await UserService.add(user);
+
+        if (response) {
+
 
           responseResult.success = true;
           responseResult.message = "user register Sucessfully ";
-          responseResult.data = user;
-          res.status(200).send(responseResult)
+          responseResult.data = response;
+
+          console.log("ddd", responseResult)
+          res.status(201).send(responseResult)
 
         }
         else {
           responseResult.success = false;
           responseResult.message = "something went wrong";
-          res.status(200).send(responseResult)
+          res.status(201).send(responseResult)
         }
       }
 
 
     } catch (error) {
       responseResult.success = false;
-      responseResult.message = error;
-      res.status(500).send(responseResult)
+      responseResult.message = error.message;
+      res.status(200).send(responseResult)
 
     }
 
@@ -61,6 +65,8 @@ class Usercontroller {
 
   };
 
+
+
   login = async (req, res) => {
 
     const responseResult = {}
@@ -68,51 +74,40 @@ class Usercontroller {
     const { email, password } = req.body;
     try {
 
-      var userInputData = {
-        email: email.toLowerCase(),
-      }
+      var userInputData = { email: email}
       UserService.find(userInputData).then(async (userData) => {
-        console.log("User Data=====>" + JSON.stringify(userData));
         if (typeof userData != undefined && userData.length > 0) {
 
-          const validPass = await bcrypt.compare(req.body.password, password);
-          if (validPass) {
-            let token = jwt.sign({ id: userData._id }, ScretKeyConfig.secret);
 
-            return res.header('Authorization', "Bearer " + token).status(200).send(token);
+          const validPass = await bcrypt.compare(password, userData[0].password);
+          console.log(validPass)
+          if (validPass) {
+            let token = jwt.sign({ id: userData[0]._id }, ScretKeyConfig.secret);
+            responseResult.success = true;
+            responseResult.message = "login sucssfully";
+            responseResult.token = token;
+
+            res.status(200).send(responseResult);
 
           } else {
-            return res.status(400).send({ 'error': 'Invalid email or password' });
+
+            responseResult.success = false;
+            responseResult.message = "Invalid email or password";
+            res.status(200).send(responseResult);
           }
 
         } else {
-          res.status(404).send({ 'error': 'Email Id not found' });
+          responseResult.success = false;
+          responseResult.message = "Email Id not found";
+          res.status(200).send(responseResult);
         }
-
-
-
       })
 
-
-
-
-
-
-
-
-
-
-
-
-      responseResult.success = false;
-      responseResult.message = "Please enter proper inputs";
-      responseResult.data = token;
-      res.status(200).send(responseResult)
-
+  
     } catch (error) {
       responseResult.success = false;
-      responseResult.message = error;
-      res.status(500).send(responseResult)
+      responseResult.message = error.message;
+      res.status(200).send(responseResult)
 
     }
 
