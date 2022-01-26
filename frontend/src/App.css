@@ -1,4 +1,6 @@
 /***    General     ***/
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,9 +8,6 @@
     font-family: "Roboto", sans-serif
 }
 
-body {
-    margin: 0 auto
-}
 
 .m-5-auto {
     margin: 5rem auto
@@ -140,4 +139,24 @@ footer p {
 /***    Home Page     ***/
 .home-page-title {
     color: #222
+}
+
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  }
+
+label {
+  font-size: .7rem;
+}
+
+input.form-control, input.form-control:focus {
+  background: #F0F0FF;
+}
+
+.error {
+  position: absolute;
+  color: red;
+  font-size: .6rem;
 }
