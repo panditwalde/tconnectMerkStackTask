@@ -1,17 +1,21 @@
 {
-  "name": "react-login-page",
+  "name": "login-register-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "axios": "^0.25.0",
     "bootstrap": "^4.5.3",
+    "delay": "^4.2.0",
     "formik": "^2.2.6",
     "history": "^4.10.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-pose": "^4.0.8",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.0.1",
+    "react-spring": "^8.0.20",
+    "start": "^5.1.0",
     "web-vitals": "^0.2.4",
     "yup": "^0.32.8"
   },
@@ -35,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "node-sass": "^4.12.0"
   }
 }
