@@ -1,22 +1,26 @@
 {
-  "name": "login-register-react",
+  "name": "new",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
     "axios": "^0.25.0",
-    "bootstrap": "^4.5.3",
+    "bootstrap": "^4.6.1",
     "delay": "^4.2.0",
     "formik": "^2.2.6",
     "history": "^4.10.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-pose": "^4.0.8",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.0.1",
+    "react-scripts": "4.0.3",
     "react-spring": "^8.0.20",
+    "reactstrap": "^9.0.1",
     "start": "^5.1.0",
-    "web-vitals": "^0.2.4",
+    "web-vitals": "^1.0.1",
     "yup": "^0.32.8"
   },
   "scripts": {
@@ -26,7 +30,10 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -39,8 +46,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "node-sass": "^4.12.0"
   }
 }
